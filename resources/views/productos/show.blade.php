@@ -35,7 +35,7 @@
                     <p class="lead">{{ $producto->descripcion }}</p>
                     <div class="d-flex">
                         <button class="btn btn-outline-dark flex-shrink-0">Comprar</button>
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <button class="btn" type="button">
 
                             @if (count(Cart::getContent()))
                             <a href="{{route('cart.checkout')}}">VER CARRITO <span >{{count(Cart::getContent())}}</span></a>

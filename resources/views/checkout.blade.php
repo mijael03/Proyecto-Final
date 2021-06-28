@@ -7,7 +7,6 @@
                 @if (count(Cart::getContent()))
                     <table class="table table-striped">
                         <thead>
-                            <th>Id</th>
                             <th>Nombre</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
@@ -15,7 +14,7 @@
                         <tbody>
                             @foreach (Cart::getContent() as $item)
                                 <tr>
-                                    <td>{{$item->id}}</td>
+                                    
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->price}}</td>
                                     <td>{{$item->quantity}}</td>

@@ -4,11 +4,11 @@
 @section('content')
 <style>
     body{
-        background-color: rgb(126, 126, 126);
+        background-color: rgb(201, 200, 200);
     }
     
     .card{
-        background-color: rgb(207, 207, 207);;
+        background-color: rgb(136, 136, 136);;
     }
     
 </style>
@@ -39,31 +39,43 @@
 
  
     <div class="row">
-	    @foreach ($products as $product)
-        
-        <div class="col-sm-3 mb-3" style="width: 18rem;">
-            <div class="card">
-            <img class="card-img-top" src="{{ asset('storage/products/' . $product->imagen) }}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{ $product->nombre }}</h5>
-              <p class="card-text">{{ $product->descripcion }}</p>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">${{ $product->precio }}</li>
-                <li class="list-group-item"><b>Categoria:</b> {{ $product->categoria }}</li>
-              </ul>
-              <div class="row">
-                <a href="{{ route('productos.show',$product->id) }}" class="btn btn-primary">Show</a>
-                <form action="{{route('cart.add')}}" method="post">
-                  @csrf
-                  <input type="hidden" name="producto_id" value="{{$product->_id}}">
-                  <input type="submit" name="btn" class="btn btn-success" value="Agregar al carrito">
-              </div>
+      <section class="py-5 bg-light">
+          <div class="container px-4 px-lg-5 mt-5">
               
-            </form>
-            </div>
-          </div>
-        </div>
-	    @endforeach
+              <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                  
+    @foreach ($products as $product)
+      <div class="col mb-5">
+                      <div class="card h-100">
+                          <!-- Product image-->
+                          <img class="card-img-top" src="{{ asset('storage/products/' . $product->imagen) }}" alt="Producto" />
+                          <!-- Product details-->
+                          <div class="card-body p-4">
+                              <div class="text-center">
+                                  <!-- Product name-->
+                                  <h5 class="fw-bolder">{{ $product->nombre }}</h5>
+                                  <!-- Product price-->
+                                  ${{ $product->precio }}
+                                  
+                              </div>
+                          </div>
+                          <!-- Product actions-->
+                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                              <div class="row"></div>
+                              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ route('productos.show',$product->id) }}">Comprar</a></div>
+        
+                          </div>
+                      </div>
+                  
+      
+                  </div>
+    @endforeach
+  
+                  
+</div>
+</div>
+</section>
+  </div>
         <div class="container">
           <div class="row justify-content-center">
           <nav >

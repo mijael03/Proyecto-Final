@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <div class="container">
+                        <a class="btn btn-primary btn-lg btn-block" href="{{route('productos.index')}}">Ve a la tienda</a>
+                    </div>
                 </div>
             </div>
         </div>
