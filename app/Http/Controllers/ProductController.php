@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::all();
-        return view('productos.index',compact('products'));
+        $products=Product::paginate(12);
+        return view('productos.index',['products'=>$products]);
     }
 
     /**
@@ -43,8 +44,7 @@ class ProductController extends Controller
             'cantidad'=>'required',
             'imagen'=> 'required|image|mimes:jpeg,png,jpg|max:4800',
         ]);
-        $image=$request->file('imagen');
-        $imageName=time().$image->getClientOriginalName();
+        $imageName=$request->file('imagen')->store('products/', 'public');
         $name=$request->get('nombre');
         $price=$request->get('precio');
         $quantity=$request->get('cantidad');
@@ -55,10 +55,10 @@ class ProductController extends Controller
         $product->precio=$price;
         $product->categoria=$category;
         $product->cantidad=$quantity;
-        $product->image='img/'.$imageName;
+        $product->image=$imageName;
 
         $product->save();
-        $request->imagen->move(public_path('img'), $imageName);
+        
 
         return redirect()->route('productos.index')
                         ->with('success','Producto creado correctamente');
@@ -104,8 +104,8 @@ class ProductController extends Controller
             'cantidad'=>'required',
             'imagen'=> 'required|image|mimes:jpeg,png,jpg|max:4800',
         ]);
-        $image=$request->file('imagen');
-        $imageName=time().$image->getClientOriginalName();
+        
+        $imageName=$request->file('imagen')->store('products/', 'public');
         $name=$request->get('nombre');
         $price=$request->get('precio');
         $quantity=$request->get('cantidad');
@@ -116,10 +116,10 @@ class ProductController extends Controller
         $product->precio=$price;
         $product->categoria=$category;
         $product->cantidad=$quantity;
-        $product->image='img'.$imageName;
+        $product->image=$imageName;
 
         $product->save();
-        $request->imagen->move(public_path('img'), $imageName);
+        
 
         return redirect()->route('productos.index')
                         ->with('success','Producto actualizado correctamente');

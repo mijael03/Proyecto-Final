@@ -28,6 +28,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="container">
+                        Total S/. {{Cart::getSubTotal()}}
+                    </div>
+                    <a class="btn btn-primary btn-lg btn-block" href="{{route('cart.sell')}}" role="button">Link</a>
                 @endif
             </div>
         </div>

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Cart;
 use App\Models\Product;
+use App\Notifications\ProductSell;
 
 class CartController extends Controller
 {
+    
     public function add(Request $request){
         $producto=Product::find($request->producto_id);
         Cart::add(
@@ -27,6 +29,11 @@ class CartController extends Controller
     public function removeProduct($id){
         
         Cart::remove($id);
+        return back();
+    }
+    public function sell(){
+        
+        auth()->user()->notify(new ProductSell());
         return back();
     }
 }
